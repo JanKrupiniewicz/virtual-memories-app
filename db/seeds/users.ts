@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { DB } from "@/db";
-import { users, UsersSchema } from "../schema/users";
+import { users } from "../schema/users";
 
 interface UserMock {
   username: string;
@@ -10,7 +10,8 @@ interface UserMock {
 }
 
 const mockUsers = (): UserMock[] => {
-  const data: Omit<Extract<UsersSchema, { mode: "create" }>, "mode">[] = [];
+  const data: UserMock[] = [];
+
   for (let i = 0; i < 100; i++) {
     data.push({
       username: faker.person.fullName(),
