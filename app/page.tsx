@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Globe, Lock, MapPin, Filter } from "lucide-react";
+import Link from "next/link";
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -81,12 +82,11 @@ export default async function Home() {
             Zarejestruj się już dziś i zacznij tworzyć swoją własną mapę
             wspomnień. To proste i darmowe!
           </p>
-          <form className="flex flex-col text-primary sm:flex-row justify-center items-center gap-4 max-w-md mx-auto">
-            <Input type="email" placeholder="Twój adres e-mail" />
-            <Button size="lg" className="seconadry">
+          <Link href="/register">
+            <Button size="lg" className="bg-primary text-primary-foreground">
               Zarejestruj się
             </Button>
-          </form>
+          </Link>
         </div>
       </section>
     </main>

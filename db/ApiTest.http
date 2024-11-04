@@ -1,0 +1,31 @@
+GET http://localhost:3000/api/memories HTTP/1.1
+
+
+### 
+POST http://localhost:3000/api/memories HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "My first memory",
+  "description": "I was born in a small town in the middle of nowhere",
+  "date": "1990-01-01"
+}
+
+
+###
+GET http://localhost:3000/api/memories/100 HTTP/1.1
+
+###
+PUT http://localhost:3000/api/memories/100 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "My first memory",
+  "description": "I was born in a small town in the middle of nowhere",
+  "latitude": 40.7128,
+  "longitude": -74.0060,
+  "category": "personal",
+  "isPublic": true
+}
+###
+DELETE http://localhost:3000/api/memories/100 HTTP/1.1

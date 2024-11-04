@@ -1,10 +1,10 @@
 import { db } from "@/db";
-import { memories, memoriesSchema } from "@/db/schema/memories";
+import { memories, createMemoriesSchema } from "@/db/schema/memories";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
   const body = await req.json();
-  const parsedBody = memoriesSchema.parse(body);
+  const parsedBody = createMemoriesSchema.parse(body);
 
   if (!parsedBody) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
@@ -30,4 +30,9 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ id: result.inserted }, { status: 201 });
+}
+
+export async function GET(req: Request): Promise<Response> {
+  const result = await db.query.memories.findMany();
+  return NextResponse.json(result);
 }

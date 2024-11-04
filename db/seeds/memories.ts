@@ -1,4 +1,4 @@
-import { memories, MemoriesSchema } from "../schema/memories";
+import { memories, CreateMemoriesSchema } from "../schema/memories";
 import { faker } from "@faker-js/faker";
 import { categories } from "../schema/memories";
 import { DB } from "@/db";
@@ -8,7 +8,7 @@ const randomCategory = () => {
 };
 
 const mock = () => {
-  const data: Omit<Extract<MemoriesSchema, { mode: "create" }>, "mode">[] = [];
+  const data: CreateMemoriesSchema[] = [];
 
   for (let i = 0; i < 100; i++) {
     data.push({

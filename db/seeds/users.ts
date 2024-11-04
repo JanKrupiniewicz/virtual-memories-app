@@ -1,16 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { DB } from "@/db";
-import { users } from "../schema/users";
+import { users, SignUpUserSchema } from "@/db/schema/users";
 
-interface UserMock {
-  username: string;
-  email: string;
-  password: string;
-  user_role: string;
-}
-
-const mockUsers = (): UserMock[] => {
-  const data: UserMock[] = [];
+const mockUsers = () => {
+  const data: SignUpUserSchema[] = [];
 
   for (let i = 0; i < 100; i++) {
     data.push({
@@ -25,6 +18,5 @@ const mockUsers = (): UserMock[] => {
 };
 
 export async function seedUsers(db: DB) {
-  const usersToInsert = mockUsers();
-  await db.insert(users).values(usersToInsert);
+  await db.insert(users).values(mockUsers());
 }

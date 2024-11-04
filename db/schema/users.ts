@@ -28,25 +28,20 @@ const baseSchema = createInsertSchema(users, {
   user_role: true,
 });
 
-export const usersSchema = z.union([
-  z.object({
-    mode: z.literal("signUp"),
-    username: baseSchema.shape.username,
-    email: baseSchema.shape.email,
-    password: baseSchema.shape.password,
-    user_role: baseSchema.shape.user_role,
-  }),
-  z.object({
-    mode: z.literal("signIn"),
-    email: baseSchema.shape.email,
-    password: baseSchema.shape.password,
-  }),
-  z.object({
-    mode: z.literal("update"),
-    username: baseSchema.shape.username,
-    email: baseSchema.shape.email,
-    password: baseSchema.shape.password,
-  }),
-]);
+export const signUpUserSchema = baseSchema;
+export type SignUpUserSchema = z.infer<typeof signUpUserSchema>;
 
-export type UsersSchema = z.infer<typeof usersSchema>;
+export const updateUserSchema = z.object({
+  id: z.number().min(1),
+  username: baseSchema.shape.username.optional(),
+  email: baseSchema.shape.email.optional(),
+  password: baseSchema.shape.password.optional(),
+  user_role: baseSchema.shape.user_role.optional(),
+});
+export type UpdateUserSchema = z.infer<typeof updateUserSchema>;
+
+export const signInUserSchema = z.object({
+  email: baseSchema.shape.email,
+  password: baseSchema.shape.password,
+});
+export type SignInUserSchema = z.infer<typeof signInUserSchema>;

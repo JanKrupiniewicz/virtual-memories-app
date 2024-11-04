@@ -4,7 +4,7 @@ import {
   integer,
   varchar,
   pgTable,
-  numeric,
+  real,
   boolean,
   timestamp,
   pgEnum,
@@ -14,8 +14,6 @@ import { relations } from "drizzle-orm";
 import { photos } from "./photos";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { title } from "process";
-import { use } from "react";
 
 export const categories = [
   "work",
@@ -37,8 +35,8 @@ export const memories = pgTable("memories", {
   userId: integer("user_id"),
   title: varchar("title", { length: 256 }).notNull(),
   description: text("description"),
-  latitude: numeric("latitude", { precision: 10, scale: 6 }),
-  longitude: numeric("longitude", { precision: 10, scale: 6 }),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
   category: categoryEnum().notNull().default("other"),
   isPublic: boolean("is_public").notNull().default(false),
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
@@ -69,27 +67,26 @@ const baseSchema = createInsertSchema(memories, {
   isPublic: true,
 });
 
-export const memoriesSchema = z.union([
-  z.object({
-    mode: z.literal("create"),
-    userId: baseSchema.shape.userId,
-    title: baseSchema.shape.title,
-    description: baseSchema.shape.description,
-    latitude: baseSchema.shape.latitude,
-    longitude: baseSchema.shape.longitude,
-    category: baseSchema.shape.category,
-    isPublic: baseSchema.shape.isPublic,
-  }),
-  z.object({
-    mode: z.literal("update"),
-    id: z.number().min(1),
-    title: baseSchema.shape.title.optional(),
-    description: baseSchema.shape.description.optional(),
-    latitude: baseSchema.shape.latitude.optional(),
-    longitude: baseSchema.shape.longitude.optional(),
-    category: baseSchema.shape.category.optional(),
-    isPublic: baseSchema.shape.isPublic.optional(),
-  }),
-]);
+export const createMemoriesSchema = z.object({
+  userId: baseSchema.shape.userId,
+  title: baseSchema.shape.title,
+  description: baseSchema.shape.description,
+  latitude: baseSchema.shape.latitude,
+  longitude: baseSchema.shape.longitude,
+  category: baseSchema.shape.category,
+  isPublic: baseSchema.shape.isPublic,
+});
 
-export type MemoriesSchema = z.infer<typeof memoriesSchema>;
+export type CreateMemoriesSchema = z.infer<typeof createMemoriesSchema>;
+
+export const updateMemoriesSchema = z.object({
+  id: z.number().min(1),
+  title: baseSchema.shape.title.optional(),
+  description: baseSchema.shape.description.optional(),
+  latitude: baseSchema.shape.latitude.optional(),
+  longitude: baseSchema.shape.longitude.optional(),
+  category: baseSchema.shape.category.optional(),
+  isPublic: baseSchema.shape.isPublic.optional(),
+});
+
+export type UpdateMemoriesSchema = z.infer<typeof updateMemoriesSchema>;
