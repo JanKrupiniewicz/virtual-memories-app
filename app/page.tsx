@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Globe, Lock, MapPin, Filter } from "lucide-react";
 import Link from "next/link";
 
@@ -25,9 +24,9 @@ function FeatureCard({
 
 export default async function Home() {
   return (
-    <main className="min-h-screen">
+    <main>
       <section className="mx-auto bg-secondary text-secondary-foreground px-4 py-20 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <h2 className="text-4xl font-bold tracking-tight md:text-5xl mb-6">
           Twórz i odkrywaj mapy wspomnień
         </h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -35,9 +34,11 @@ export default async function Home() {
           konkretnymi miejscami. Odkryj fascynujące opowieści innych
           użytkowników z całego świata.
         </p>
-        <Button size="lg" className="bg-primary text-primary-foreground">
-          Rozpocznij podróż
-        </Button>
+        <Link href="/register">
+          <Button size="lg" className="bg-primary text-primary-foreground">
+            Rozpocznij podróż
+          </Button>
+        </Link>
       </section>
 
       <section id="features" className="py-20">
@@ -67,26 +68,6 @@ export default async function Home() {
               description="Poznawaj fascynujące historie z różnych zakątków globu."
             />
           </div>
-        </div>
-      </section>
-
-      <section
-        id="cta"
-        className="bg-secondary text-secondary-foreground py-20"
-      >
-        <div className="container mx-auto px-4 text-center">
-          <h3 className="text-3xl font-bold mb-6">
-            Dołącz do społeczności Wirtualnych Map Wspomnień
-          </h3>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Zarejestruj się już dziś i zacznij tworzyć swoją własną mapę
-            wspomnień. To proste i darmowe!
-          </p>
-          <Link href="/register">
-            <Button size="lg" className="bg-primary text-primary-foreground">
-              Zarejestruj się
-            </Button>
-          </Link>
         </div>
       </section>
     </main>

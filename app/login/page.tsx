@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { signUpUserSchema } from "@/db/schema/users";
+import { signInUserSchema } from "@/db/schema/users";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,20 +17,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof signUpUserSchema>>({
-    resolver: zodResolver(signUpUserSchema),
+  const form = useForm<z.infer<typeof signInUserSchema>>({
+    resolver: zodResolver(signInUserSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
-      user_role: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof signUpUserSchema>) {
+  function onSubmit(values: z.infer<typeof signInUserSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
@@ -39,22 +37,9 @@ export default function RegisterPage() {
   return (
     <div className="flex items-center justify-center py-24">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Rejestracja</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Logowanie</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nazwa</FormLabel>
-                  <FormControl>
-                    <Input type="text" {...field} className="w-full" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="email"
@@ -82,7 +67,7 @@ export default function RegisterPage() {
               )}
             />
             <Button type="submit" className="w-full">
-              Zarejestruj się
+              Log in
             </Button>
           </form>
         </Form>
