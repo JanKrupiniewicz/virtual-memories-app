@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,9 +27,7 @@ export default function LoginPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signInUserSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  async function onSubmit(values: z.infer<typeof signInUserSchema>) {
     console.log(values);
   }
 
