@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { generateSessionToken, createSession } from "@/lib/auth/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -29,6 +30,20 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof signInUserSchema>) {
     console.log(values);
+
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to login");
+    }
+
+    router.push("/memories");
   }
 
   return (
