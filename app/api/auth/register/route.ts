@@ -11,8 +11,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
   }
 
-  console.log(parsedBody);
-
   const [result] = await db
     .insert(users)
     .values(parsedBody)

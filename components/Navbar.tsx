@@ -1,9 +1,13 @@
-import { ModeToggle } from "@/components/ModeToggle";
+import { ModeToggle } from "@/components/mode-toggle";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { MapPinCheck } from "lucide-react";
+import { getCurrentSession } from "@/lib/auth/auth";
+import { NavbarLogout } from "./navbar-logout";
 
-export function Navbar() {
+export async function Navbar() {
+  const { session, user } = await getCurrentSession();
+
   return (
     <header className="container mx-auto px-4 py-6 flex flex-col space-y-8 md:space-y-0 md:flex-row justify-between items-center">
       <Link href="/">
@@ -14,16 +18,31 @@ export function Navbar() {
       </Link>
       <nav>
         <ul className="flex space-x-4">
-          <li>
-            <Link href="/login">
-              <Button>Zaloguj się</Button>
-            </Link>
-          </li>
-          <li>
-            <Link href="/register">
-              <Button variant="secondary">Zarejestruj się</Button>
-            </Link>
-          </li>
+          {session !== null && user !== null ? (
+            <>
+              <li>
+                <Link href="/memories">
+                  <Button>Twoje wspomnienia</Button>
+                </Link>
+              </li>
+              <li>
+                <NavbarLogout />
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link href="/login">
+                  <Button>Zaloguj się</Button>
+                </Link>
+              </li>
+              <li>
+                <Link href="/register">
+                  <Button variant="secondary">Zarejestruj się</Button>
+                </Link>
+              </li>
+            </>
+          )}
           <li>
             <ModeToggle />
           </li>

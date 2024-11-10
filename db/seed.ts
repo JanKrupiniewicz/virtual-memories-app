@@ -9,7 +9,12 @@ async function resetTable(db: DB, table: Table) {
 }
 
 async function main() {
-  const tablesToReset = [schema.memories, schema.users];
+  const tablesToReset = [
+    schema.memories,
+    schema.users,
+    schema.photos,
+    schema.session,
+  ];
 
   for (const table of tablesToReset) {
     await resetTable(db, table);

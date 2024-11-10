@@ -6,8 +6,9 @@ import {
   setSessionTokenCookie,
 } from "@/lib/auth/auth";
 import { db } from "@/db";
+import { cookies } from "next/headers";
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const body = await req.json();
   const parsedBody = signInUserSchema.parse(body);
 
@@ -33,4 +34,7 @@ export async function POST(req: Request, res: Response) {
   const token = generateSessionToken();
   const session = await createSession(token, existingUser.id);
   setSessionTokenCookie(token, session.expiresAt);
+
+  await cookies();
+  return new Response(null, { status: 200 });
 }

@@ -30,8 +30,6 @@ export default function RegisterPage() {
   });
 
   async function onSubmit(values: z.infer<typeof signUpUserSchema>) {
-    console.log(values);
-
     const response = await fetch("/api/auth/register", {
       method: "POST",
       headers: {
