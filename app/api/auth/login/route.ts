@@ -33,8 +33,7 @@ export async function POST(req: Request) {
 
   const token = generateSessionToken();
   const session = await createSession(token, existingUser.id);
-  setSessionTokenCookie(token, session.expiresAt);
+  await setSessionTokenCookie(token, session.expiresAt);
 
-  await cookies();
   return new Response(null, { status: 200 });
 }

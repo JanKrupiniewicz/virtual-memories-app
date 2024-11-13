@@ -15,9 +15,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useContext } from "react";
+import { SessionContext } from "@/store/session-context";
 
 export default function LoginPage() {
   const router = useRouter();
+  const sessionCtx = useContext(SessionContext);
 
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
@@ -40,6 +43,7 @@ export default function LoginPage() {
       throw new Error("Failed to login");
     }
 
+    await sessionCtx?.revalidateSession();
     router.push("/memories");
   }
 

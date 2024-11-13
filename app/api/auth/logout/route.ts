@@ -9,7 +9,7 @@ export async function POST() {
 
   if (session.session) {
     await invalidateSession(session.session?.id);
-    deleteSessionTokenCookie();
+    await deleteSessionTokenCookie();
     return new Response(null, { status: 200 });
   }
 

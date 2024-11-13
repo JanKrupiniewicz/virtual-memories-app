@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
+import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { SessionContextProvider } from "@/store/session-context";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,16 +22,18 @@ export default function RootLayout({
         suppressHydrationWarning
         className={cn("min-h-screen bg-background font-sans antialiased")}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <SessionContextProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProvider>
+        </SessionContextProvider>
       </body>
     </html>
   );

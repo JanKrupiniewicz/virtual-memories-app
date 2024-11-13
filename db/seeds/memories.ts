@@ -15,8 +15,8 @@ const mock = () => {
       userId: faker.number.int({ min: 1, max: 100 }),
       title: faker.lorem.words(),
       description: faker.lorem.paragraph(),
-      latitude: faker.number.float({ min: -90, max: 90 }).toString(),
-      longitude: faker.number.float({ min: -180, max: 180 }).toString(),
+      latitude: faker.number.float({ min: -90, max: 90 }),
+      longitude: faker.number.float({ min: -180, max: 180 }),
       category: randomCategory(),
       isPublic: false,
     });
