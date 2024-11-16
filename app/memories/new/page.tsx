@@ -22,6 +22,11 @@ export default function NewMemoryPage() {
   const router = useRouter();
   const sessionCtx = useContext(SessionContext);
 
+  if (!sessionCtx?.session) {
+    router.push("/");
+    return null;
+  }
+
   const form = useForm<z.infer<typeof createMemoriesSchema>>({
     resolver: zodResolver(createMemoriesSchema),
     defaultValues: {

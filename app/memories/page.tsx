@@ -4,6 +4,12 @@ import { getMemoriesForUser } from "@/lib/api/memories";
 import MemoryCard from "@/components/memory-card";
 
 export default async function MemoriesPage() {
+  const session = getCurrentSession();
+
+  if (!session) {
+    redirect("/");
+  }
+
   const usersMemories = await getMemoriesForUser();
 
   return (

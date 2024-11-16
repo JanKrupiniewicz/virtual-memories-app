@@ -41,10 +41,10 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
         </h1>
         <div className="flex justify-between items-center mb-2">
           <Link href={`/memories/${memory.id}`}>
-            <Button variant="ghost">View</Button>
+            <Button variant="ghost">Zobacz</Button>
           </Link>
           <Link href={`/memories/${memory.id}/update`}>
-            <Button variant="ghost">Update</Button>
+            <Button variant="ghost">Edytuj</Button>
           </Link>
         </div>
         <p className="text-sm text-justify text-muted-foreground mb-2">

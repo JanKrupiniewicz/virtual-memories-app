@@ -1,7 +1,7 @@
 "use client";
 
 import { UpdateMemoriesSchema } from "@/db/schema/memories";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +21,8 @@ import {
   LockOpen,
 } from "lucide-react";
 import { toast } from "sonner";
-import Loading from "@/components/ui/loading";
+import { SessionContext } from "@/store/session-context";
+import { useRouter } from "next/navigation";
 
 export default function MemoryPage({
   params,
@@ -29,6 +30,13 @@ export default function MemoryPage({
   params: Promise<{ memoryId: string }>;
 }) {
   const [memory, setMemory] = useState<UpdateMemoriesSchema | null>(null);
+  const router = useRouter();
+  const sessionCtx = useContext(SessionContext);
+
+  if (!sessionCtx?.session) {
+    router.push("/");
+    return null;
+  }
 
   useEffect(() => {
     async function fetchMemory() {
@@ -96,7 +104,7 @@ export default function MemoryPage({
           <Button variant="outline" asChild>
             <Link href="/memories" className="flex items-center space-x-2">
               <ArrowLeftIcon className="w-4 h-4" />
-              <span>Back</span>
+              <span>Wróć</span>
             </Link>
           </Button>
           <div className="space-x-2">
@@ -106,13 +114,13 @@ export default function MemoryPage({
                 className="flex items-center space-x-2"
               >
                 <EditIcon className="w-4 h-4" />
-                <span>Update</span>
+                <span>Edytuj</span>
               </Link>
             </Button>
             <Button onClick={deleteMemory} variant="destructive" asChild>
               <span className="flex items-center">
                 <TrashIcon className="w-4 h-4" />
-                <span>Delete</span>
+                <span>Usuń</span>
               </span>
             </Button>
           </div>

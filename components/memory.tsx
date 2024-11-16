@@ -18,11 +18,7 @@ import {
 } from "lucide-react";
 import { UpdateMemoriesSchema } from "@/db/schema/memories";
 
-export default function MemoryPage({
-  memory,
-}: {
-  memory: UpdateMemoriesSchema;
-}) {
+export default function Memory({ memory }: { memory: UpdateMemoriesSchema }) {
   return (
     <div className="container mx-auto py-8 px-4 md:px-0">
       <Card className="max-w-2xl mx-auto">
