@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   _: Request,
-  { params }: { params: { memoryId: string } }
+  { params }: { params: Promise<{ memoryId: string }> }
 ): Promise<Response> {
-  const id = parseInt(params.memoryId);
+  const id = parseInt((await params).memoryId);
 
   if (!id) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
@@ -23,7 +23,7 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { memoryId: string } }
+  { params }: { params: Promise<{ memoryId: string }> }
 ): Promise<Response> {
   const body = await req.json();
   const validatedBody = createMemoriesSchema.parse(body);
@@ -32,7 +32,7 @@ export async function PUT(
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
   }
 
-  const id = parseInt(params.memoryId);
+  const id = parseInt((await params).memoryId);
 
   if (!id) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
@@ -55,9 +55,9 @@ export async function PUT(
 
 export async function DELETE(
   _: Request,
-  { params }: { params: { memoryId: string } }
+  { params }: { params: Promise<{ memoryId: string }> }
 ): Promise<Response> {
-  const id = parseInt(params.memoryId);
+  const id = parseInt((await params).memoryId);
 
   if (!id) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });

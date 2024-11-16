@@ -22,6 +22,11 @@ export default function LoginPage() {
   const router = useRouter();
   const sessionCtx = useContext(SessionContext);
 
+  if (sessionCtx?.session) {
+    router.push("/");
+    return null;
+  }
+
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
     defaultValues: {

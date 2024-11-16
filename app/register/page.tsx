@@ -15,9 +15,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { SessionContext } from "@/store/session-context";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const sessionCtx = useContext(SessionContext);
+
+  if (sessionCtx?.session) {
+    router.push("/");
+    return null;
+  }
 
   const form = useForm<z.infer<typeof signUpUserSchema>>({
     resolver: zodResolver(signUpUserSchema),

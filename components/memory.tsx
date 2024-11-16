@@ -1,7 +1,3 @@
-"use client";
-
-import { UpdateMemoriesSchema } from "@/db/schema/memories";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,50 +16,18 @@ import {
   ArrowLeftIcon,
   LockOpen,
 } from "lucide-react";
-import { toast } from "sonner";
-import Loading from "@/components/ui/loading";
+import { UpdateMemoriesSchema } from "@/db/schema/memories";
 
 export default function MemoryPage({
-  params,
+  memory,
 }: {
-  params: Promise<{ memoryId: string }>;
+  memory: UpdateMemoriesSchema;
 }) {
-  const [memory, setMemory] = useState<UpdateMemoriesSchema | null>(null);
-
-  useEffect(() => {
-    async function fetchMemory() {
-      const { memoryId } = await params;
-      const response = await fetch(`/api/memories/${memoryId}`);
-      const memory = await response.json();
-      setMemory(memory);
-    }
-
-    fetchMemory();
-  }, []);
-
-  if (!memory) {
-    return null;
-  }
-
-  async function deleteMemory() {
-    const response = await fetch(`/api/memories/${memory?.id}`, {
-      method: "DELETE",
-    });
-
-    if (!response.ok) {
-      toast.error("Failed to delete memory");
-    }
-
-    toast.success("Event has been deleted");
-  }
-
   return (
     <div className="container mx-auto py-8 px-4 md:px-0">
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
-          <CardTitle className="text-4xl font-bold tracking-tight italic underline">
-            {memory.title}
-          </CardTitle>
+          <CardTitle className="text-3xl font-bold">{memory.title}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {memory.latitude && memory.longitude && (
@@ -74,7 +38,7 @@ export default function MemoryPage({
               </span>
             </div>
           )}
-          <p className="text-lg text-justify">{memory.description}</p>
+          <p className="text-lg">{memory.description}</p>
           <div className="flex items-center justify-between">
             <Badge variant="secondary">{memory.category}</Badge>
             <div className="flex items-center space-x-1 text-sm">
@@ -109,11 +73,14 @@ export default function MemoryPage({
                 <span>Update</span>
               </Link>
             </Button>
-            <Button onClick={deleteMemory} variant="destructive" asChild>
-              <span className="flex items-center">
+            <Button variant="destructive" asChild>
+              <Link
+                href={`/memories/${memory.id}/delete`}
+                className="flex items-center space-x-2"
+              >
                 <TrashIcon className="w-4 h-4" />
                 <span>Delete</span>
-              </span>
+              </Link>
             </Button>
           </div>
         </CardFooter>

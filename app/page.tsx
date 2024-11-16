@@ -26,7 +26,7 @@ export default async function Home() {
   return (
     <main>
       <section className="mx-auto bg-secondary text-secondary-foreground px-4 py-20 text-center">
-        <h2 className="text-4xl font-bold tracking-tight md:text-5xl mb-6">
+        <h2 className="text-4xl italic font-bold tracking-tight md:text-5xl mb-6">
           Twórz i odkrywaj mapy wspomnień
         </h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto">

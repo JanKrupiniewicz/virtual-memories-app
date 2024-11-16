@@ -13,6 +13,7 @@ export async function POST(req: Request): Promise<Response> {
   const [result] = await db
     .insert(memories)
     .values({
+      userId: parsedBody.userId,
       title: parsedBody.title ?? "",
       description: parsedBody.description,
       latitude: parsedBody.latitude,
@@ -32,7 +33,7 @@ export async function POST(req: Request): Promise<Response> {
   return NextResponse.json({ id: result.inserted }, { status: 201 });
 }
 
-export async function GET(req: Request): Promise<Response> {
+export async function GET(_: Request): Promise<Response> {
   const result = await db.query.memories.findMany();
   return NextResponse.json(result);
 }

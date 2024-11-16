@@ -6,6 +6,7 @@ import { ModeToggle } from "./mode-toggle";
 import { useContext } from "react";
 import { SessionContext } from "@/store/session-context";
 import { useRouter } from "next/navigation";
+import { LogOut } from "lucide-react";
 
 export function Navbar() {
   const sessionCtx = useContext(SessionContext);
@@ -31,16 +32,12 @@ export function Navbar() {
     <nav>
       <ul className="flex space-x-4">
         {sessionCtx?.session ? (
-          <>
-            <li>
-              <Link href="/memories">
-                <Button>Twoje wspomnienia</Button>
-              </Link>
-            </li>
-            <li>
-              <Button onClick={signOut}>Wyloguj</Button>
-            </li>
-          </>
+          <li>
+            <Button onClick={signOut}>
+              <LogOut />
+              Wyloguj
+            </Button>
+          </li>
         ) : (
           <>
             <li>
