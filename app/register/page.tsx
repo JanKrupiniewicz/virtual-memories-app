@@ -50,7 +50,7 @@ export default function RegisterPage() {
       throw new Error("Failed to register");
     }
 
-    router.push("/memories");
+    router.push("/");
   }
 
   return (

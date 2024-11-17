@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { SessionContextProvider } from "@/store/session-context";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Wirtuale Wspomnienia",
@@ -31,6 +32,7 @@ export default function RootLayout({
           >
             <Header />
             {children}
+            <Toaster />
             <Footer />
           </ThemeProvider>
         </SessionContextProvider>

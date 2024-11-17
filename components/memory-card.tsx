@@ -52,10 +52,8 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
         </p>
       </CardContent>
       <CardFooter className="p-4 pt-0 text-xs text-muted-foreground">
-        <div className="flex flex-col justify-between">
-          <Badge variant="secondary" className="absolute top-2 right-2">
-            {memory.category}
-          </Badge>
+        <div className="flex flex-row w-full justify-between">
+          <Badge variant="secondary">{memory.category}</Badge>
           {memory.isPublic ? "Public memory" : "Private memory"}
         </div>
       </CardFooter>

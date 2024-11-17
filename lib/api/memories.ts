@@ -7,7 +7,7 @@ import { eq, and } from "drizzle-orm";
 export async function getMemoriesForUser() {
   const session = await getCurrentSession();
   if (!session) {
-    redirect("/auth/login");
+    redirect("/");
   }
 
   const usersMemories = await db
@@ -19,29 +19,25 @@ export async function getMemoriesForUser() {
   return usersMemories;
 }
 
-export async function getPublicMemoriesForUser() {
+export async function getMemoryById(memoryId: string) {
   const session = await getCurrentSession();
+  if (!session) {
+    redirect("/");
+  }
 
-  const usersMemories = await db
+  const memoryIdNumber = parseInt(memoryId);
+
+  const memory = await db
     .select()
     .from(memories)
     .where(
       and(
-        eq(memories.isPublic, true),
-        eq(memories.userId, session.session?.userId ?? -1)
+        eq(memories.userId, session.session?.userId ?? -1),
+        eq(memories.id, memoryIdNumber)
       )
     )
+    .limit(1)
     .execute();
 
-  return usersMemories;
-}
-
-export async function getPublicMemories() {
-  const usersMemories = await db
-    .select()
-    .from(memories)
-    .where(eq(memories.isPublic, true))
-    .execute();
-
-  return usersMemories;
+  return memory;
 }

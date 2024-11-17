@@ -23,6 +23,12 @@ export function SessionContextProvider({
 
   async function revalidateSession() {
     const response = await fetch("/api/auth/session");
+
+    if (response.status === 401) {
+      setSession(null);
+      return;
+    }
+
     const data = await response.json();
     setSession(data.session);
   }
