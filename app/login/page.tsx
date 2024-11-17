@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useContext } from "react";
 import { SessionContext } from "@/store/session-context";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -45,10 +46,11 @@ export default function LoginPage() {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to login");
+      toast.error("Failed to login");
     }
 
     await sessionCtx?.revalidateSession();
+    toast.success("Logged in successfully");
     router.push("/memories");
   }
 

@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { SessionContext } from "@/store/session-context";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -47,9 +48,10 @@ export default function RegisterPage() {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to register");
+      toast.error("Failed to register");
     }
 
+    toast.success("Registered successfully");
     router.push("/");
   }
 
