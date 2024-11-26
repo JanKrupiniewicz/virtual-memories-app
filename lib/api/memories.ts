@@ -1,8 +1,9 @@
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { getCurrentSession } from "../auth/auth";
-import { memories } from "@/db/schema";
+import { memories, photos } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
+import { photosSchema } from "@/db/schema/photos";
 
 export async function getMemoriesForUser() {
   const session = await getCurrentSession();
@@ -40,4 +41,29 @@ export async function getMemoryById(memoryId: string) {
     .execute();
 
   return memory;
+}
+
+export async function saveMemoryPhoto({
+  memoryId,
+  photoUrl,
+  description,
+}: {
+  memoryId: number;
+  photoUrl: string;
+  description?: string;
+}) {
+  const session = await getCurrentSession();
+  if (!session) {
+    redirect("/");
+  }
+
+  const parsedBody = photosSchema.parse({
+    memoryId: memoryId,
+    url: photoUrl,
+    description: description ?? "",
+  });
+
+  const result = await db.insert(photos).values(parsedBody).execute();
+
+  return result;
 }

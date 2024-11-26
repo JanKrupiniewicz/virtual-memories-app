@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default async function NewMemoryPage() {
   const session = await getCurrentSession();
 
-  if (session.session === null || session.session === null) {
+  if (session.session === null || session.user === null) {
     redirect("/");
   }
 
