@@ -6,7 +6,7 @@ import MemoryCard from "@/components/memory-card";
 export default async function MemoriesPage() {
   const session = await getCurrentSession();
 
-  if (session.session === null || session.session === null) {
+  if (session.session === null || session.user === null) {
     redirect("/");
   }
 
