@@ -3,7 +3,7 @@
 import { CircleUserRound } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { CirclePlus, MapPinCheck } from "lucide-react";
+import { CirclePlus, MapPinCheck, FileSliders } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SignUpUserSchema } from "@/db/schema/users";
 
@@ -33,6 +33,14 @@ export function LoggedInNavbar() {
           </div>
         </div>
         <div className="flex flex-row gap-4 items-center">
+          {user?.userRole === "admin" ? (
+            <Link href="/admin">
+              <Button className="hover:scale-105">
+                <FileSliders />
+                Panel admina
+              </Button>
+            </Link>
+          ) : null}
           <Link href="/memories/new">
             <Button className="hover:scale-105">
               <CirclePlus />

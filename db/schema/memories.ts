@@ -57,6 +57,8 @@ const baseSchema = createInsertSchema(memories, {
   latitude: (schema) => schema.latitude.min(-90).max(90),
   longitude: (schema) => schema.longitude.min(-180).max(180),
   category: (schema) => schema.category,
+  isPublic: (schema) => schema.isPublic,
+  createdAt: (schema) => schema.createdAt,
 }).pick({
   userId: true,
   title: true,
@@ -65,6 +67,7 @@ const baseSchema = createInsertSchema(memories, {
   longitude: true,
   category: true,
   isPublic: true,
+  createdAt: true,
 });
 
 export const createMemoriesSchema = z.object({
@@ -87,6 +90,7 @@ export const updateMemoriesSchema = z.object({
   longitude: baseSchema.shape.longitude.optional(),
   category: baseSchema.shape.category.optional(),
   isPublic: baseSchema.shape.isPublic.optional(),
+  createdAt: baseSchema.shape.createdAt.optional(),
 });
 
 export type UpdateMemoriesSchema = z.infer<typeof updateMemoriesSchema>;

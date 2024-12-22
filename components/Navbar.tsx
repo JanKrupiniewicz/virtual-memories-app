@@ -41,14 +41,14 @@ export function Navbar() {
         ) : (
           <>
             <li>
-              <Link href="/login">
-                <Button>Zaloguj się</Button>
-              </Link>
+              <Button asChild>
+                <Link href="/login">Zaloguj się</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/register">
-                <Button variant="secondary">Zarejestruj się</Button>
-              </Link>
+              <Button asChild>
+                <Link href="/register">Zarejestruj się</Link>
+              </Button>
             </li>
           </>
         )}

@@ -41,3 +41,13 @@ export async function getMemoryById(memoryId: string) {
 
   return memory;
 }
+
+export async function getMemories() {
+  const session = await getCurrentSession();
+  if (!session) {
+    redirect("/");
+  }
+
+  const memories = await db.query.memories.findMany();
+  return memories;
+}
