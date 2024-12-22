@@ -23,6 +23,7 @@ import {
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function UpdateMemoryForm({
   memory,
@@ -78,12 +79,11 @@ export default function UpdateMemoryForm({
             <FormItem>
               <FormLabel>Opis</FormLabel>
               <FormControl>
-                <Input
-                  type="text"
+                <Textarea
                   {...field}
                   value={field.value ?? ""}
                   required
-                  className="w-full"
+                  className="w-full resize-none h-32"
                 />
               </FormControl>
               <FormMessage />

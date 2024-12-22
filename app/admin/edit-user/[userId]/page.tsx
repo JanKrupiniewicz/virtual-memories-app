@@ -1,4 +1,4 @@
-import { EditProfileForm } from "@/components/edit-profile-form";
+import { EditProfileForm } from "@/components/forms/edit-profile";
 import { getUserById } from "@/lib/api/users";
 
 export default async function EditUserPage({
@@ -14,11 +14,11 @@ export default async function EditUserPage({
   }
 
   return (
-    <div className="container">
-      <h1>Edit User</h1>
-      <EditProfileForm user={user}>
-        <button type="submit">Save</button>
-      </EditProfileForm>
+    <div className="container mx-auto py-8">
+      <h1 className="text-3xl text-center tracking-tight italic font-bold mb-6">
+        Edytuj profil użytkownika
+      </h1>
+      <EditProfileForm user={user}></EditProfileForm>
     </div>
   );
 }

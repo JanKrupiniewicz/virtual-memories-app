@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/register-form";
+import RegisterForm from "@/components/forms/register";
 import { getCurrentSession } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
 

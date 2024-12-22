@@ -1,4 +1,4 @@
-import UpdateMemoryForm from "@/components/update-memory-form";
+import UpdateMemoryForm from "@/components/forms/update-memory";
 import { getMemoryById } from "@/lib/api/memories";
 import { getCurrentSession } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
@@ -23,7 +23,7 @@ export default async function UpdateMemoryPage({
 
   return (
     <div className="flex items-center justify-center py-8">
-      <div className="p-2 rounded-lg shadow-lg w-full max-w-md">
+      <div className="p-2 shadow-lg w-full max-w-xl">
         <h2 className="text-3xl text-center tracking-tight italic font-bold mb-6">
           Edytuj wspomnienie
         </h2>
