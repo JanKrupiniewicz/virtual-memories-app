@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -19,6 +18,8 @@ import { SessionContext } from "@/store/session-context";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Textarea } from "../ui/textarea";
+import { ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function CreateMemoryForm() {
   const sessionCtx = useContext(SessionContext);
@@ -47,10 +48,10 @@ export default function CreateMemoryForm() {
     });
 
     if (!response.ok) {
-      toast.error("Failed to create memory");
+      toast.error("Nie udało się utworzyć wspomnienia.");
     }
 
-    toast.success("Memory created successfully");
+    toast.success("Wspomnienie zostało utworzone pomyślnie.");
     router.push("/memories");
   }
 
@@ -176,9 +177,17 @@ export default function CreateMemoryForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Utwórz wspomnienie
-        </Button>
+        <div className="flex flex-row space-x-5">
+          <Link href="/memories" className="flex items-center space-x-2">
+            <Button variant="ghost">
+              <ArrowLeftIcon className="w-4 h-4" />
+              <span>Wróć</span>
+            </Button>
+          </Link>
+          <Button type="submit" className="w-full">
+            Utwórz wspomnienie
+          </Button>
+        </div>
       </form>
     </Form>
   );

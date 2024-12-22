@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -41,11 +40,11 @@ export default function LoginForm() {
     });
 
     if (!response.ok) {
-      toast.error("Failed to login");
+      toast.error("Nie udało się zalogować.");
     }
 
     await sessionCtx?.revalidateSession();
-    toast.success("Logged in successfully");
+    toast.success("Zalogowano pomyślnie.");
     router.push("/memories");
   }
 

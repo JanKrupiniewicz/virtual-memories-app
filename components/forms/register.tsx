@@ -39,10 +39,10 @@ export default function RegisterForm() {
     });
 
     if (!response.ok) {
-      toast.error("Failed to register");
+      toast.error("Rejestrowanie nie powiodło się.");
     }
 
-    toast.success("Registered successfully");
+    toast.success("Rejestracja zakończona pomyślnie.");
     router.push("/");
   }
 

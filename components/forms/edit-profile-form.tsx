@@ -46,10 +46,10 @@ export function EditProfileForm({ user }: { user: UpdateUserSchema }) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to apply changes");
+      throw new Error("Wystąpił błąd podczas zapisywania zmian.");
     }
 
-    toast.success("Changes applied successfully.");
+    toast.success("Zmiany zostały zapisane pomyślnie.");
     router.push("/admin");
   }
 

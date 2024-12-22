@@ -30,12 +30,7 @@ export async function getMemoryById(memoryId: string) {
   const memory = await db
     .select()
     .from(memories)
-    .where(
-      and(
-        eq(memories.userId, session.session?.userId ?? -1),
-        eq(memories.id, memoryIdNumber)
-      )
-    )
+    .where(eq(memories.id, memoryIdNumber))
     .limit(1)
     .execute();
 

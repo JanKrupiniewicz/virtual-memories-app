@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,10 +34,10 @@ export default function SingleMemoryCard({
     });
 
     if (!response.ok) {
-      toast.error("Failed to delete memory");
+      toast.error("Nie udało się usunąć wspomnienia.");
     }
 
-    toast.success("Event has been deleted");
+    toast.success("Wspomnienie zostało usunięte.");
     router.push("/memories");
   }
 

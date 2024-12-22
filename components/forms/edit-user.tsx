@@ -63,11 +63,11 @@ export function EditUserDialog({
     });
 
     if (!response.ok) {
-      throw new Error("Failed to apply changes");
+      throw new Error("Wystąpił błąd podczas zapisywania zmian.");
     }
 
     setUser(values);
-    toast.success("Changes applied successfully.");
+    toast.success("Zmiany zostały zapisane pomyślnie.");
   }
 
   return (
@@ -75,9 +75,10 @@ export function EditUserDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Edytuj profil</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Wprowadź zmiany w swoim profilu. Kliknij "Zapisz zmiany" aby
+            zatwierdzić.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -164,7 +165,7 @@ export function EditUserDialog({
               <Button type="submit">Zapisz zmiany</Button>
               <DialogClose asChild>
                 <Button type="button" variant="secondary">
-                  Close
+                  Zamknij
                 </Button>
               </DialogClose>
             </DialogFooter>

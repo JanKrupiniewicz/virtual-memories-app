@@ -1,4 +1,4 @@
-import { EditProfileForm } from "@/components/forms/edit-profile";
+import { EditProfileForm } from "@/components/forms/edit-profile-form";
 import { getUserById } from "@/lib/api/users";
 
 export default async function EditUserPage({

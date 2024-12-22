@@ -1,9 +1,7 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -49,10 +47,10 @@ export default function UpdateMemoryForm({
     });
 
     if (!response.ok) {
-      toast.error("Failed to update memory");
+      toast.error("Nie udało się zaktualizować wspomnienia.");
     }
 
-    toast.success("Memory updated successfully");
+    toast.success("Wspomnienie zostało zaktualizowane.");
     router.push("/memories");
   }
 

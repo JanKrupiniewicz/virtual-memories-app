@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Table,
   TableBody,
@@ -32,12 +31,12 @@ export default function UsersDisplay({ users }: { users: UpdateUserSchema[] }) {
     });
 
     if (!response.ok) {
-      toast.error("Failed to delete user");
+      toast.error("Nie udało się usunąć użytkownika.");
       return;
     }
 
     setCurrentUsers(users.filter((user) => user.id !== id));
-    toast.success("User has been deleted");
+    toast.success("Użytkownik został usunięty.");
   }
 
   return (
@@ -62,7 +61,7 @@ export default function UsersDisplay({ users }: { users: UpdateUserSchema[] }) {
               <Button variant="ghost" asChild>
                 <Link href={`/admin/edit-user/${user.id}`}>Edytuj</Link>
               </Button>
-              <Button onClick={() => deleteUser(user.id)} variant="outline">
+              <Button onClick={() => deleteUser(user.id)} variant="destructive">
                 Usuń
               </Button>
             </TableCell>

@@ -18,7 +18,11 @@ export default async function MemoryPage({
   const memoryId = (await params).memoryId;
   const memory = await getMemoryById(memoryId);
 
-  if (memory.length === 0) {
+  if (
+    memory.length === 0 ||
+    (memory[0].userId !== session.session.userId &&
+      session.user.userRole !== "admin")
+  ) {
     redirect("/memories");
   }
 
