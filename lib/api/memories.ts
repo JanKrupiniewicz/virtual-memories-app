@@ -46,3 +46,10 @@ export async function getMemories() {
   const memories = await db.query.memories.findMany();
   return memories;
 }
+
+export async function getPublicMemories() {
+  const memories = await db.query.memories.findMany({
+    where: (memories, { eq }) => eq(memories.isPublic, true),
+  });
+  return memories;
+}

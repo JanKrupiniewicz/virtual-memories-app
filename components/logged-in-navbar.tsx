@@ -2,7 +2,7 @@
 import { CircleUserRound } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { CirclePlus, MapPinCheck, FileSliders } from "lucide-react";
+import { CirclePlus, MapPinCheck, FileSliders, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { UpdateUserSchema } from "@/db/schema/users";
 import { EditUserDialog } from "./forms/edit-user";
@@ -53,6 +53,12 @@ export function LoggedInNavbar() {
             <Button className="hover:scale-105">
               <MapPinCheck />
               Twoje wspomnienia
+            </Button>
+          </Link>
+          <Link href="/public-memories">
+            <Button className="hover:scale-105">
+              <Users />
+              Odkrywaj wspomnienia
             </Button>
           </Link>
         </div>
