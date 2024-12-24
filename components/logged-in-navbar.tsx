@@ -2,10 +2,25 @@
 import { CircleUserRound } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { CirclePlus, MapPinCheck, FileSliders, Users } from "lucide-react";
+import {
+  CirclePlus,
+  MapPinCheck,
+  FileSliders,
+  Users,
+  Map,
+  MapPinned,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { UpdateUserSchema } from "@/db/schema/users";
 import { EditUserDialog } from "./forms/edit-user";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function LoggedInNavbar() {
   const [user, setUser] = useState<UpdateUserSchema | null>(null);
@@ -43,24 +58,51 @@ export function LoggedInNavbar() {
               </Button>
             </Link>
           ) : null}
-          <Link href="/memories/new">
-            <Button className="hover:scale-105">
-              <CirclePlus />
-              Dodaj wspomnienie
-            </Button>
-          </Link>
-          <Link href="/memories">
-            <Button className="hover:scale-105">
-              <MapPinCheck />
-              Twoje wspomnienia
-            </Button>
-          </Link>
-          <Link href="/public-memories">
-            <Button className="hover:scale-105">
-              <Users />
-              Odkrywaj wspomnienia
-            </Button>
-          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button className="hover:scale-105">
+                <MapPinned />
+                Wspomnienia
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                {" "}
+                <Link
+                  href="/memories/new"
+                  className="flex w-56 items-center gap-2"
+                >
+                  <CirclePlus />
+                  Dodaj wspomnienie
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                {" "}
+                <Link href="/memories" className="flex items-center gap-2">
+                  <MapPinCheck />
+                  Twoje wspomnienia
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                {" "}
+                <Link
+                  href="/public-memories"
+                  className="flex items-center gap-2"
+                >
+                  <Users />
+                  Odkrywaj wspomnienia
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                {" "}
+                <Link href="/memories-map" className="flex items-center gap-2">
+                  <Map />
+                  Mapa wspomnień
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>
