@@ -48,6 +48,7 @@ export default function UpdateMemoryForm({
 
     if (!response.ok) {
       toast.error("Nie udało się zaktualizować wspomnienia.");
+      return;
     }
 
     toast.success("Wspomnienie zostało zaktualizowane.");

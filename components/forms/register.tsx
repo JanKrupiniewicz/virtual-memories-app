@@ -40,6 +40,7 @@ export default function RegisterForm() {
 
     if (!response.ok) {
       toast.error("Rejestrowanie nie powiodło się.");
+      return;
     }
 
     toast.success("Rejestracja zakończona pomyślnie.");

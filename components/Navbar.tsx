@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { SessionContext } from "@/store/session-context";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 export function Navbar() {
   const sessionCtx = useContext(SessionContext);
@@ -20,7 +21,8 @@ export function Navbar() {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to logout");
+      toast.error("Nie udało się wylogować.");
+      return;
     }
 
     sessionCtx?.setSession(null);

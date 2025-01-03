@@ -10,30 +10,35 @@ import { memories } from "./memories";
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { users } from "./users";
 
-export const photos = pgTable("photos", {
+export const comments = pgTable("comments", {
   id: serial("id").notNull().primaryKey(),
-  memoryId: integer("memory_id"),
-  url: varchar("url", { length: 256 }).notNull(),
+  memoryId: varchar("memory_id"),
+  userId: varchar("user_id"),
   description: text("description"),
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
 });
 
-export const photosRelations = relations(photos, ({ one }) => ({
+export const commentsRelations = relations(comments, ({ one }) => ({
   memory: one(memories, {
-    fields: [photos.memoryId],
+    fields: [comments.memoryId],
     references: [memories.id],
+  }),
+  user: one(users, {
+    fields: [comments.userId],
+    references: [users.id],
   }),
 }));
 
-export const photosSchema = createInsertSchema(photos, {
-  memoryId: (schema) => schema.memoryId.min(1),
-  url: (schema) => schema.url.min(1).max(256),
+export const commentsSchema = createInsertSchema(comments, {
+  memoryId: (schema) => schema.memoryId,
+  userId: (schema) => schema.userId,
   description: (schema) => schema.description.nullable(),
 }).pick({
   memoryId: true,
-  url: true,
+  userId: true,
   description: true,
 });
 
-export type PhotosSchema = z.infer<typeof photosSchema>;
+export type CommentsSchema = z.infer<typeof commentsSchema>;

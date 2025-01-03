@@ -49,6 +49,7 @@ export default function CreateMemoryForm() {
 
     if (!response.ok) {
       toast.error("Nie udało się utworzyć wspomnienia.");
+      return;
     }
 
     toast.success("Wspomnienie zostało utworzone pomyślnie.");

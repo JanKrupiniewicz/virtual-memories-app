@@ -46,7 +46,8 @@ export function EditProfileForm({ user }: { user: UpdateUserSchema }) {
     });
 
     if (!response.ok) {
-      throw new Error("Wystąpił błąd podczas zapisywania zmian.");
+      toast.error("Nie udało się zaktualizować profilu.");
+      return;
     }
 
     toast.success("Zmiany zostały zapisane pomyślnie.");

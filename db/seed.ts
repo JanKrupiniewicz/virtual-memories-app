@@ -12,15 +12,17 @@ async function main() {
   const tablesToReset = [
     schema.memories,
     schema.users,
-    schema.photos,
+    schema.comments,
     schema.session,
   ];
 
   for (const table of tablesToReset) {
     await resetTable(db, table);
   }
+
   await seeds.seedMemories(db);
   await seeds.seedUsers(db);
+  await seeds.seedComments(db);
 }
 
 main()

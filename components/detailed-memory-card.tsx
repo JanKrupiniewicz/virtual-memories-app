@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import { UpdateMemoriesSchema } from "@/db/schema/memories";
 import { useRouter } from "next/navigation";
 
-export default function SingleMemoryCard({
+export default function DetailedMemoryCard({
   memory,
 }: {
   memory: UpdateMemoriesSchema;
@@ -35,6 +35,7 @@ export default function SingleMemoryCard({
 
     if (!response.ok) {
       toast.error("Nie udało się usunąć wspomnienia.");
+      return;
     }
 
     toast.success("Wspomnienie zostało usunięte.");

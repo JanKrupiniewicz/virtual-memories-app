@@ -63,7 +63,8 @@ export function EditUserDialog({
     });
 
     if (!response.ok) {
-      throw new Error("Wystąpił błąd podczas zapisywania zmian.");
+      toast.error("Wystąpił błąd podczas zapisywania zmian.");
+      return;
     }
 
     setUser(values);

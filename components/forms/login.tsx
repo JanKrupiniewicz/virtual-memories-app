@@ -41,6 +41,7 @@ export default function LoginForm() {
 
     if (!response.ok) {
       toast.error("Nie udało się zalogować.");
+      return;
     }
 
     await sessionCtx?.revalidateSession();

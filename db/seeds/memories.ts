@@ -15,10 +15,17 @@ const mock = () => {
       userId: faker.number.int({ min: 1, max: 100 }),
       title: faker.lorem.words(),
       description: faker.lorem.paragraph(),
+      photoUrl: faker.image.urlLoremFlickr({
+        width: 640,
+        height: 480,
+        category: ["nature", "city", "people", "animals", "food", "abstract"][
+          Math.floor(Math.random() * 6)
+        ],
+      }),
       latitude: faker.number.float({ min: -90, max: 90 }),
       longitude: faker.number.float({ min: -180, max: 180 }),
       category: randomCategory(),
-      isPublic: false,
+      isPublic: Math.random() > 0.5,
     });
   }
   return data;

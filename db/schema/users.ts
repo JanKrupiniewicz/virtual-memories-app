@@ -3,6 +3,7 @@ import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { memories } from "./memories";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { comments } from "./comments";
 
 export const users = pgTable("users", {
   id: serial("id").notNull().primaryKey(),
@@ -14,6 +15,7 @@ export const users = pgTable("users", {
 
 export const userRelations = relations(users, ({ many }) => ({
   memories: many(memories),
+  comments: many(comments),
 }));
 
 const baseSchema = createInsertSchema(users, {
