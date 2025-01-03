@@ -13,7 +13,13 @@ import Link from "next/link";
 
 type Memory = typeof memories.$inferSelect;
 
-export default function MemoryCard({ memory }: { memory: Memory }) {
+export default function MemoryCard({
+  memory,
+  isMemoryEditable = true,
+}: {
+  memory: Memory;
+  isMemoryEditable?: boolean;
+}) {
   return (
     <Card className="max-w-md mx-auto">
       <CardHeader className="gap-4 p-4">
@@ -39,12 +45,20 @@ export default function MemoryCard({ memory }: { memory: Memory }) {
           {memory.title}
         </h1>
         <div className="flex justify-between items-center mb-2">
-          <Link href={`/memories/${memory.id}`}>
-            <Button variant="ghost">Zobacz</Button>
-          </Link>
-          <Link href={`/memories/${memory.id}/update`}>
-            <Button variant="ghost">Edytuj</Button>
-          </Link>
+          {isMemoryEditable ? (
+            <>
+              <Link href={`/memories/${memory.id}`}>
+                <Button variant="ghost">Zobacz</Button>
+              </Link>
+              <Link href={`/memories/${memory.id}/update`}>
+                <Button variant="ghost">Edytuj</Button>
+              </Link>
+            </>
+          ) : (
+            <Link href={`/public-memories/${memory.id}`}>
+              <Button variant="ghost">Zobacz</Button>
+            </Link>
+          )}
         </div>
         <p className="text-sm text-justify text-muted-foreground mb-2">
           {memory.description}

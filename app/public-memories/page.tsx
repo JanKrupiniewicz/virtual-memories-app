@@ -22,7 +22,11 @@ export default async function PublicMemoriesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {publicMemories.map((memory) => (
-            <MemoryCard key={memory.id} memory={memory} />
+            <MemoryCard
+              key={memory.id}
+              memory={memory}
+              isMemoryEditable={false}
+            />
           ))}
         </div>
       )}
