@@ -5,21 +5,16 @@ import { UserCircle } from "lucide-react";
 
 export default async function Comment({
   comment,
+  username,
 }: {
   comment: CommentsSchema;
+  username: string;
 }) {
-  const user = comment.userId ? await getUserById(comment.userId) : null;
-
   return (
     <>
-      <div className="flex items-center gap-4">
-        <UserCircle className="w-8 h-8" />
-        <div className="flex flex-col">
-          <span className="text-sm font-semibold">
-            {user?.username || "Anonimowy"}
-          </span>
-          <span className="text-sm">{comment.description}</span>
-        </div>
+      <div className="flex flex-col items-start m-4 gap-2">
+        <span className="text-sm font-semibold">{username || "Anonimowy"}</span>
+        <span className="text-sm">{comment.description}</span>
       </div>
       <Separator className="my-2" />
     </>

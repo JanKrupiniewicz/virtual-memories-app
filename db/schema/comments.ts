@@ -14,9 +14,9 @@ import { users } from "./users";
 
 export const comments = pgTable("comments", {
   id: serial("id").notNull().primaryKey(),
-  memoryId: varchar("memory_id"),
-  userId: varchar("user_id"),
-  description: text("description"),
+  memoryId: varchar("memory_id").notNull(),
+  userId: varchar("user_id").notNull(),
+  description: text("description").notNull(),
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
 });
 

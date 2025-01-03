@@ -18,3 +18,10 @@ export async function getUserById(id: string) {
   });
   return user;
 }
+
+export async function getUserByUsername(username: string) {
+  const user = await db.query.users.findFirst({
+    where: (users, { eq }) => eq(users.username, username),
+  });
+  return user;
+}
