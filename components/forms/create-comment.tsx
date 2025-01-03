@@ -16,23 +16,23 @@ import {
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
 import { Textarea } from "../ui/textarea";
+import { CommentsWithUsers } from "../comments-card";
+import { UpdateUserSchema } from "@/db/schema/users";
 
 export default function CreateCommentForm({
   memoryId,
-  userId,
+  user,
   setCurrentComments,
 }: {
   memoryId: number;
-  userId: number;
-  setCurrentComments: Dispatch<SetStateAction<CommentsSchema[]>>;
+  user: UpdateUserSchema;
+  setCurrentComments: Dispatch<SetStateAction<CommentsWithUsers[]>>;
 }) {
-  console.log(memoryId, userId, setCurrentComments);
-
   const form = useForm<z.infer<typeof commentsSchema>>({
     resolver: zodResolver(commentsSchema),
     defaultValues: {
-      userId: "",
-      memoryId: "",
+      userId: String(user.id),
+      memoryId: String(memoryId),
       description: "",
     },
   });
@@ -52,7 +52,19 @@ export default function CreateCommentForm({
     }
 
     const newComment = await response.json();
-    setCurrentComments((prevComments) => [...prevComments, newComment]);
+    setCurrentComments((prevComments) => [
+      ...prevComments,
+      {
+        users: {
+          id: user.id,
+          username: user.username || "",
+          email: user.email || "",
+          password: user.password || "",
+          userRole: user.userRole || "",
+        },
+        comments: newComment,
+      },
+    ]);
 
     toast.success("Komentarz został dodany pomyślnie.");
     form.reset();

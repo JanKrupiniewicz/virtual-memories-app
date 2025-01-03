@@ -7,24 +7,9 @@ export async function getCommentsForMemory(memoryId: string) {
   const memoryComments = await db
     .select()
     .from(comments)
+    .leftJoin(users, eq(comments.userId, users.id))
     .where(eq(comments.memoryId, memoryId))
     .execute();
 
   return memoryComments;
-}
-
-export async function getUsernamesForComments(comments: CommentsSchema[]) {
-  const usernames: string[] = [];
-
-  comments.forEach(async (comment) => {
-    const user = await db
-      .select({ username: users.username })
-      .from(users)
-      .where(eq(users.id, parseInt(comment.userId)))
-      .execute();
-
-    usernames.push(user[0].username);
-  });
-
-  return usernames;
 }

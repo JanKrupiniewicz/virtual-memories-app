@@ -32,7 +32,13 @@ export async function POST(req: Request): Promise<Response> {
       userId: validatedBody.userId as string,
       description: validatedBody.description as string,
     })
-    .returning({ inserted: comments.id });
+    .returning({
+      id: comments.id,
+      description: comments.description,
+      userId: comments.userId,
+      memoryId: comments.memoryId,
+      createdAt: comments.createdAt,
+    });
 
   if (!result) {
     return NextResponse.json(
@@ -41,5 +47,5 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  return NextResponse.json({ id: result.inserted }, { status: 201 });
+  return NextResponse.json(result, { status: 201 });
 }

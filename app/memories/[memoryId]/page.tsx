@@ -1,9 +1,6 @@
 import CommentsCard from "@/components/comments-card";
 import DetailedMemoryCard from "@/components/detailed-memory-card";
-import {
-  getCommentsForMemory,
-  getUsernamesForComments,
-} from "@/lib/api/comments";
+import { getCommentsForMemory } from "@/lib/api/comments";
 import { getMemoryById } from "@/lib/api/memories";
 import { getUserByUsername } from "@/lib/api/users";
 import { getCurrentSession } from "@/lib/auth/auth";
@@ -23,7 +20,6 @@ export default async function MemoryPage({
   const memoryId = (await params).memoryId;
   const memory = await getMemoryById(memoryId);
   const comments = await getCommentsForMemory(memoryId);
-  const commentsUsernames = await getUsernamesForComments(comments);
 
   if (
     memory.length === 0 ||
@@ -38,9 +34,14 @@ export default async function MemoryPage({
       <DetailedMemoryCard memory={memory[0]} />
       <CommentsCard
         comments={comments}
-        usernames={commentsUsernames}
         memoryId={memory[0].id}
-        userId={session.session.userId}
+        user={{
+          id: session.session.userId,
+          username: session.user.username,
+          email: session.user.email,
+          password: session.user.password,
+          userRole: session.user.userRole,
+        }}
       />
     </div>
   );
