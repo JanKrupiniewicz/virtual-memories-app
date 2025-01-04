@@ -1,14 +1,17 @@
 import { db } from "@/db";
 import { getCurrentSession } from "../auth/auth";
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
+import { users } from "@/db/schema";
+import { redirect } from "next/navigation";
 
 export async function getUsers() {
-  const session = getCurrentSession();
+  const session = await getCurrentSession();
   if (!session) {
-    return [];
+    redirect("/");
   }
-  const users = await db.query.users.findMany();
-  return users;
+
+  const allUsers = await db.select().from(users).orderBy(asc(users.id));
+  return allUsers;
 }
 
 export async function getUserById(id: string) {

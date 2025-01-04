@@ -12,28 +12,14 @@ export default async function POST(
   { params }: { params: { memoryId: string } }
 ) {
   const memoryId = params.memoryId;
-  const memoryIdNumber = parseInt(memoryId);
+  const body = await req.json();
+  const photoUrl = body.photoUrl;
 
-  const formData = await req.formData();
-  const file = formData.get("file");
+  const result = await saveMemoryPhoto({ memoryId, photoUrl });
 
-  if (!(file instanceof File)) {
-    return new Response("Invalid file upload.", { status: 400 });
+  if (!result) {
+    return new Response(null, { status: 500 });
   }
 
-  // try {
-  //   const result = await cloudinary.uploader.upload(file, {
-  //     upload_preset: "memory-preset",
-  //     folder: "memories",
-  //   });
-
-  //   await saveMemoryPhoto({
-  //     memoryId: memoryIdNumber,
-  //     photoUrl: result.secure_url,
-  //   });
-
-  //   return new Response(JSON.stringify(result), { status: 200 });
-  // } catch (err) {
-  //   return new Response("Error uploading the files.", { status: 500 });
-  // }
+  return new Response(null, { status: 201 });
 }
