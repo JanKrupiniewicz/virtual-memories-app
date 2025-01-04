@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { MapPinCheck } from "lucide-react";
 import { Navbar } from "./navbar";

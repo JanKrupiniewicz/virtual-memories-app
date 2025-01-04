@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,6 +22,7 @@ import {
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function UpdateMemoryForm({
   memory,
@@ -48,10 +48,11 @@ export default function UpdateMemoryForm({
     });
 
     if (!response.ok) {
-      toast.error("Failed to update memory");
+      toast.error("Nie udało się zaktualizować wspomnienia.");
+      return;
     }
 
-    toast.success("Memory updated successfully");
+    toast.success("Wspomnienie zostało zaktualizowane.");
     router.push("/memories");
   }
 
@@ -78,12 +79,11 @@ export default function UpdateMemoryForm({
             <FormItem>
               <FormLabel>Opis</FormLabel>
               <FormControl>
-                <Input
-                  type="text"
+                <Textarea
                   {...field}
                   value={field.value ?? ""}
                   required
-                  className="w-full"
+                  className="w-full resize-none h-32"
                 />
               </FormControl>
               <FormMessage />

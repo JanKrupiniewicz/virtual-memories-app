@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
@@ -7,6 +6,7 @@ import { useContext } from "react";
 import { SessionContext } from "@/store/session-context";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 export function Navbar() {
   const sessionCtx = useContext(SessionContext);
@@ -21,7 +21,8 @@ export function Navbar() {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to logout");
+      toast.error("Nie udało się wylogować.");
+      return;
     }
 
     sessionCtx?.setSession(null);
@@ -41,14 +42,14 @@ export function Navbar() {
         ) : (
           <>
             <li>
-              <Link href="/login">
-                <Button>Zaloguj się</Button>
-              </Link>
+              <Button asChild>
+                <Link href="/login">Zaloguj się</Link>
+              </Button>
             </li>
             <li>
-              <Link href="/register">
-                <Button variant="secondary">Zarejestruj się</Button>
-              </Link>
+              <Button asChild>
+                <Link href="/register">Zarejestruj się</Link>
+              </Button>
             </li>
           </>
         )}

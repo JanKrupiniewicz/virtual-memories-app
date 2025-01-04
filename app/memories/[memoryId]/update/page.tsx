@@ -1,8 +1,15 @@
 import PhotoUpload from "@/components/photo-upload";
-import UpdateMemoryForm from "@/components/update-memory-form";
+import UpdateMemoryForm from "@/components/forms/update-memory";
 import { getMemoryById } from "@/lib/api/memories";
 import { getCurrentSession } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 
 export default async function UpdateMemoryPage({
   params,
@@ -18,7 +25,11 @@ export default async function UpdateMemoryPage({
   const memoryId = (await params).memoryId;
   const memory = await getMemoryById(memoryId);
 
-  if (memory.length === 0) {
+  if (
+    memory.length === 0 ||
+    (memory[0].userId !== session.session.userId &&
+      session.user.userRole !== "admin")
+  ) {
     redirect("/memories");
   }
 

@@ -10,7 +10,7 @@ const mockUsers = () => {
       username: faker.person.fullName(),
       email: faker.internet.email(),
       password: faker.internet.password({ memorable: true, length: 8 }),
-      user_role: "user",
+      userRole: "user",
     });
   }
 

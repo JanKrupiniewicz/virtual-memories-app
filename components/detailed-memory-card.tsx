@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,7 +21,7 @@ import { toast } from "sonner";
 import { UpdateMemoriesSchema } from "@/db/schema/memories";
 import { useRouter } from "next/navigation";
 
-export default function SingleMemoryCard({
+export default function DetailedMemoryCard({
   memory,
 }: {
   memory: UpdateMemoriesSchema;
@@ -35,10 +34,11 @@ export default function SingleMemoryCard({
     });
 
     if (!response.ok) {
-      toast.error("Failed to delete memory");
+      toast.error("Nie udało się usunąć wspomnienia.");
+      return;
     }
 
-    toast.success("Event has been deleted");
+    toast.success("Wspomnienie zostało usunięte.");
     router.push("/memories");
   }
 
