@@ -20,9 +20,6 @@ export default async function PublicMemoryPage({
   const memory = await getMemoryById(memoryId);
   const comments = await getCommentsForMemory(memoryId);
 
-  console.log(memory);
-  console.log(comments);
-
   return (
     <div className="py-8 px-4 md:px-0 max-w-2xl mx-auto space-y-10">
       <DetailedPublicMemoryCard memory={memory[0]} />

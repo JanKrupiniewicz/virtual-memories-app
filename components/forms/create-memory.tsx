@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { categories, createMemoriesSchema } from "@/db/schema/memories";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SessionContext } from "@/store/session-context";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -24,6 +24,7 @@ import Link from "next/link";
 
 export default function CreateMemoryForm() {
   const sessionCtx = useContext(SessionContext);
+  const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof createMemoriesSchema>>({
@@ -32,6 +33,7 @@ export default function CreateMemoryForm() {
       userId: sessionCtx?.session?.userId,
       title: "",
       description: "",
+      photoUrl: "",
       latitude: null,
       longitude: null,
       category: "other",
@@ -40,12 +42,35 @@ export default function CreateMemoryForm() {
   });
 
   async function onSubmit(values: z.infer<typeof createMemoriesSchema>) {
+    if (!file) {
+      toast.error("Nie wybrano zdjęcia.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const fileResponse = await fetch("/api/photos", {
+      method: "POST",
+      body: formData,
+    });
+
+    const cloudinaryResponse = await fileResponse.json();
+
+    if (cloudinaryResponse.message !== "success") {
+      toast.error("Nie udało się przesłać zdjęcia.");
+      return;
+    }
+
     const response = await fetch("/api/memories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        ...values,
+        photoUrl: cloudinaryResponse.imgUrl,
+      }),
     });
 
     if (!response.ok) {
@@ -60,6 +85,22 @@ export default function CreateMemoryForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        <FormItem>
+          <FormLabel>Zdjęcie</FormLabel>
+          <FormControl>
+            <Input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setFile(file);
+                }
+              }}
+              required
+            />
+          </FormControl>
+        </FormItem>
         <FormField
           control={form.control}
           name="title"
@@ -148,6 +189,7 @@ export default function CreateMemoryForm() {
                 <select
                   {...field}
                   className="w-full border border-gray-300 rounded-md p-2"
+                  aria-label="Wybierz kategorię"
                 >
                   {categories.map((category) => (
                     <option key={category} value={category}>

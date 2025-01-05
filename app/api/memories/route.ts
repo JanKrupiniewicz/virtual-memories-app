@@ -16,6 +16,7 @@ export async function POST(req: Request): Promise<Response> {
       userId: parsedBody.userId,
       title: parsedBody.title ?? "",
       description: parsedBody.description,
+      photoUrl: parsedBody.photoUrl,
       latitude: parsedBody.latitude,
       longitude: parsedBody.longitude,
       category: parsedBody.category,

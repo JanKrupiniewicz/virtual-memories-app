@@ -1,15 +1,7 @@
-import PhotoUpload from "@/components/photo-upload";
 import UpdateMemoryForm from "@/components/forms/update-memory";
 import { getMemoryById } from "@/lib/api/memories";
 import { getCurrentSession } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 
 export default async function UpdateMemoryPage({
   params,
@@ -39,7 +31,6 @@ export default async function UpdateMemoryPage({
         <h2 className="text-3xl text-center tracking-tight italic font-bold mb-6">
           Edytuj wspomnienie
         </h2>
-        <PhotoUpload memoryId={memory[0].id.toString()} />
         <UpdateMemoryForm memory={memory[0]} />
       </div>
     </div>
