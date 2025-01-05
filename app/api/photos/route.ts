@@ -13,11 +13,7 @@ export async function POST(req: NextRequest) {
 
   const fileUri = "data:" + mimeType + ";" + encoding + "," + base64Data;
 
-  console.log();
-
   const res = await uploadToCloudinary(fileUri, file.name);
-
-  console.log(res);
 
   if (res.success && res.result) {
     return NextResponse.json({

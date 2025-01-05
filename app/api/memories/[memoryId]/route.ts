@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { memories } from "@/db/schema";
+import { comments, memories } from "@/db/schema";
 import { createMemoriesSchema } from "@/db/schema/memories";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -64,6 +64,15 @@ export async function DELETE(
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
   }
 
-  const result = await db.delete(memories).where(eq(memories.id, id));
+  const deleteMemories = await db.delete(memories).where(eq(memories.id, id));
+  const deleteComments = await db
+    .delete(comments)
+    .where(eq(comments.memoryId, id.toString()));
+
+  const result = {
+    memories: deleteMemories,
+    comments: deleteComments,
+  };
+
   return NextResponse.json(result);
 }
