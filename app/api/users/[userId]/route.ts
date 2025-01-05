@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { memories, users } from "@/db/schema";
+import { comments, memories, users } from "@/db/schema";
 import { updateUserSchema } from "@/db/schema/users";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -30,6 +30,17 @@ export async function DELETE(
   if (!deleteUserMemoriesResult) {
     return NextResponse.json(
       { error: "Failed to delete user memories" },
+      { status: 500 }
+    );
+  }
+
+  const deleteUserCommentsResult = await db
+    .delete(comments)
+    .where(eq(users.id, id));
+
+  if (!deleteUserCommentsResult) {
+    return NextResponse.json(
+      { error: "Failed to delete user comments" },
       { status: 500 }
     );
   }

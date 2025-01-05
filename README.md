@@ -1,8 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## About This Project
+
+This application allows users to create, store, and share their memories in a virtual space. The application leverages the power of server-side rendering and static site generation to deliver a fast and seamless user experience.
+
+Users can perform CRUD operations on posted memories, add comments, and discover public memories posted by other users. The application provides an admin panel with a small dashboard for managing content and users.
+
+## Features
+
+- **User Authentication** - Secure login and registration system.
+- **Memory Management** - Perform CRUD operations to manage virtual memories.
+- **Image Uploads** - Upload images directly to Cloudinary.
+- **Public and Private Memories** - Filter memories based on privacy settings.
+- **Comment System** - Add comments to memories and interact with other users.
+- **Admin Dashboard** - Manage users, monitor activities, and moderate content.
+- **Responsive Design** - Optimized for mobile and desktop devices.
+
+## Technologies Used
+
+- **Next.js** - React framework for server-side rendering and static site generation.
+- **ShadcnUI** - Modern and customizable UI components.
+- **Drizzle ORM** - Lightweight SQL ORM for database interaction.
+- **PostgreSQL** - Relational database for data storage.
+- **Tailwind CSS** - Utility-first CSS framework for responsive designs.
+- **Fetch API** - Built-in web API for handling HTTP requests.
+- **Docker Compose** - Containerization for easier deployment and development.
+- **Cloudinary** - Cloud-based image and video storage service.
+- **Lucia V1** - Implementing auth from scratch based on Lucia project.
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the Repository**
+
+```bash
+git clone https://github.com/your-repository/virtual-memories-app.git
+cd virtual-memories-app
+```
+
+2. **Install Dependencies**
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. **Environment Variables**
+   Create a `.env.local` file in the root directory and add the following:
+
+```
+DATABASE_URL=your_postgresql_database_url
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+```
+
+4. **Run Migrations**
+
+```bash
+npm run db:migrate
+```
+
+5. **Run the Development Server**
 
 ```bash
 npm run dev
@@ -10,27 +69,17 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+6. **Building for Production**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is ready for deployment on platforms like Vercel, Netlify, or Docker-based hosting providers.
