@@ -21,10 +21,19 @@ export default function DetailedPublicMemoryCard({
 }: {
   memory: UpdateMemoriesSchema;
 }) {
+  console.log(memory);
+
   return (
     <Card className="max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle className="text-4xl font-bold tracking-tight italic underline">
+          {memory.photoUrl && (
+            <img
+              src={memory.photoUrl}
+              alt={String(memory.title)}
+              className="w-full h-64 object-cover rounded-md shadow-md mb-6"
+            />
+          )}
           {memory.title}
         </CardTitle>
       </CardHeader>

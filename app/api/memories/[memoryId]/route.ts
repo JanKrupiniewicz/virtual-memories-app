@@ -43,6 +43,7 @@ export async function PUT(
     .set({
       title: validatedBody.title,
       description: validatedBody.description,
+      photoUrl: validatedBody.photoUrl,
       latitude: validatedBody.latitude,
       longitude: validatedBody.longitude,
       category: validatedBody.category,

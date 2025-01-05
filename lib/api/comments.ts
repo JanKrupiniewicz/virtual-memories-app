@@ -9,7 +9,7 @@ export async function getCommentsForMemory(memoryId: string) {
     .from(comments)
     .leftJoin(users, eq(comments.userId, users.id))
     .where(eq(comments.memoryId, memoryId))
-    .execute();
+    .orderBy(comments.createdAt);
 
   return memoryComments;
 }
