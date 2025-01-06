@@ -1,3 +1,5 @@
+import "server-only";
+
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { getCurrentSession } from "../auth/auth";

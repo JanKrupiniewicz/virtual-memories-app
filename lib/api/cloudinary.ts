@@ -1,6 +1,7 @@
+import "server-only";
+
 import { cloudinary } from "@/cloudinary.config"; // your config path
 import { UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
-import { NextRequest } from "next/server";
 
 type UploadResponse =
   | { success: true; result?: UploadApiResponse }

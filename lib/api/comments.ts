@@ -1,3 +1,5 @@
+import "server-only";
+
 import { db } from "@/db";
 import { comments, users } from "@/db/schema";
 import { CommentsSchema } from "@/db/schema/comments";

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { db } from "@/db";
 import { getCurrentSession } from "../auth/auth";
 import { asc, eq } from "drizzle-orm";
