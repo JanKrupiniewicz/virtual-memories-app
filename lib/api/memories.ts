@@ -7,11 +7,6 @@ import { memories } from "@/db/schema";
 import { eq, and, asc } from "drizzle-orm";
 
 export async function getMemories() {
-  const session = await getCurrentSession();
-  if (!session) {
-    redirect("/");
-  }
-
   const allMemories = await db
     .select()
     .from(memories)
@@ -21,9 +16,6 @@ export async function getMemories() {
 
 export async function getMemoriesForUser() {
   const session = await getCurrentSession();
-  if (!session) {
-    redirect("/");
-  }
 
   const usersMemories = await db
     .select()
@@ -35,11 +27,6 @@ export async function getMemoriesForUser() {
 }
 
 export async function getMemoryById(memoryId: string) {
-  const session = await getCurrentSession();
-  if (!session) {
-    redirect("/");
-  }
-
   const memoryIdNumber = parseInt(memoryId);
 
   const memory = await db
@@ -59,9 +46,6 @@ export async function saveMemoryPhoto({
   photoUrl: string;
 }) {
   const session = await getCurrentSession();
-  if (!session) {
-    redirect("/");
-  }
 
   const memoryIdNumber = parseInt(memoryId);
   const result = await db

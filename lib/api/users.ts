@@ -7,11 +7,6 @@ import { users } from "@/db/schema";
 import { redirect } from "next/navigation";
 
 export async function getUsers() {
-  const session = await getCurrentSession();
-  if (!session) {
-    redirect("/");
-  }
-
   const allUsers = await db.select().from(users).orderBy(asc(users.id));
   return allUsers;
 }
