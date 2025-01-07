@@ -25,6 +25,8 @@ Users can perform CRUD operations on posted memories, add comments, and discover
 - **Docker Compose** - Containerization for easier deployment and development.
 - **Cloudinary** - Cloud-based image and video storage service.
 - **Lucia V1** - Implementing auth from scratch based on Lucia project.
+- **Zod** - TypeScript-first schema declaration and validation library.
+- **React Hook Form** - Performant, flexible and extensible forms handling.
 
 ## Getting Started
 
